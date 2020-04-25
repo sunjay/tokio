@@ -79,29 +79,41 @@ pub(crate) trait Schedule: Sync + Sized + 'static {
     }
 }
 
-/// Create a new task with an associated join handle
-pub(crate) fn joinable<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
-where
-    T: Future + Send + 'static,
-    S: Schedule,
-{
-    let raw = RawTask::new::<_, S>(task);
 
-    let task = Task {
-        raw,
-        _p: PhantomData,
-    };
+cfg_test_util_unstable! {
+    /// Create a new task with an associated join handle
+    ///
+    /// In orer to take advantage of the [Syscall] trait
+    pub(crate) fn joinable<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
+    where
+        T: Future + Send + 'static,
+        S: Schedule,
+    {
+        let syscalls = crate::runtime::context::syscalls();
+        let (tx, rx) = crate::sync::oneshot::channel();
 
-    let join = JoinHandle::new(raw);
+        let task = async move {
+            let result = task.await;
+            let _ = tx.send(result); // ignore if the JoinHandle drops
+        };
 
-    (Notified(task), join)
+        let wrapped_task = syscalls.spawn(Box::pin(task));
+        let raw = RawTask::new::<_, S>(wrapped_task);
+        let task = Task {
+            raw,
+            _p: PhantomData,
+        };
+        let join = JoinHandle::new(raw, rx);
+        (Notified(task), join)
+    }
 }
 
-cfg_rt_util! {
-    /// Create a new `!Send` task with an associated join handle
-    pub(crate) unsafe fn joinable_local<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
+
+cfg_not_test_util_unstable! {
+    /// Create a new task with an associated join handle
+    pub(crate) fn joinable<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
     where
-        T: Future + 'static,
+        T: Future + Send + 'static,
         S: Schedule,
     {
         let raw = RawTask::new::<_, S>(task);
@@ -114,6 +126,55 @@ cfg_rt_util! {
         let join = JoinHandle::new(raw);
 
         (Notified(task), join)
+    }
+}
+
+cfg_rt_util! {
+
+    cfg_not_test_util_unstable! {
+        /// Create a new `!Send` task with an associated join handle
+        pub(crate) unsafe fn joinable_local<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
+        where
+            T: Future + 'static,
+            S: Schedule,
+        {
+            let raw = RawTask::new::<_, S>(task);
+
+            let task = Task {
+                raw,
+                _p: PhantomData,
+            };
+
+            let join = JoinHandle::new(raw);
+
+            (Notified(task), join)
+        }
+    }
+
+    cfg_test_util_unstable! {
+        /// Create a new `!Send` task with an associated join handle
+        pub(crate) unsafe fn joinable_local<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
+        where
+            T: Future + 'static,
+            S: Schedule,
+        {
+            let syscalls = crate::runtime::context::syscalls();
+            let (tx, rx) = crate::sync::oneshot::channel();
+
+            let task = async move {
+                let result = task.await;
+                let _ = tx.send(result); // ignore if the JoinHandle drops
+            };
+
+            let wrapped_task = syscalls.spawn(Box::pin(task));
+            let raw = RawTask::new::<_, S>(wrapped_task);
+            let task = Task {
+                raw,
+                _p: PhantomData,
+            };
+            let join = JoinHandle::new(raw, rx);
+            (Notified(task), join)
+        }
     }
 }
 

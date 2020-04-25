@@ -13,7 +13,7 @@ cfg_rt_core! {
 /// obtained using the [`Runtime::handle`] method.
 ///
 /// [`Runtime::handle`]: crate::runtime::Runtime::handle()
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct Handle {
     pub(super) spawner: Spawner,
 
@@ -28,6 +28,22 @@ pub struct Handle {
 
     /// Blocking pool spawner
     pub(super) blocking_spawner: blocking::Spawner,
+
+    /// TODO: Document Syscalls
+    #[cfg(all(feature = "test-util", tokio_unstable))]
+    pub(super) syscalls: std::sync::Arc<dyn crate::syscall::Syscalls>,
+}
+
+impl fmt::Debug for Handle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Handle")
+            .field("spawner", &self.spawner)
+            .field("io_handle", &self.io_handle)
+            .field("time_handle", &self.time_handle)
+            .field("clock", &self.clock)
+            .field("blocking_spawner", &self.blocking_spawner)
+            .finish()
+    }
 }
 
 impl Handle {

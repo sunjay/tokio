@@ -392,6 +392,12 @@ cfg_time! {
     pub mod time;
 }
 
+#[cfg(tokio_unstable)]
+cfg_test_util_unstable! {
+    pub(crate) mod syscall;
+    pub use syscall::Syscalls;
+}
+
 mod util;
 
 cfg_macros! {
