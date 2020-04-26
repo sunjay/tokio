@@ -47,12 +47,10 @@ cfg_rt_core! {
     }
 }
 
-#[cfg(tokio_unstable)]
-cfg_test_util! {
+cfg_test_util_unstable! {
     use std::sync::Arc;
     use crate::syscall::{Syscalls, DefaultSyscalls};
 
-    #[allow(dead_code)] // Unused for now, gated by the unstable flag
     pub(crate) fn syscalls() -> Arc<dyn Syscalls> {
         CONTEXT.with(|ctx| match *ctx.borrow() {
             Some(ref ctx) => Arc::clone(& ctx.syscalls.clone()),
