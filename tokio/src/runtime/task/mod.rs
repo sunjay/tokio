@@ -89,7 +89,7 @@ cfg_test_util_unstable! {
         T: Future + Send + 'static,
         S: Schedule,
     {
-        let syscalls = crate::runtime::context::syscalls();
+        let syscalls = crate::runtime::context::syscalls().expect("not in Tokio runtime");
         let (tx, rx) = crate::sync::oneshot::channel();
 
         let task = async move {
@@ -158,7 +158,7 @@ cfg_rt_util! {
             T: Future + 'static,
             S: Schedule,
         {
-            let syscalls = crate::runtime::context::syscalls();
+            let syscalls = crate::runtime::context::syscalls().expect("not in Tokio runtime");
             let (tx, rx) = crate::sync::oneshot::channel();
 
             let task = async move {

@@ -49,13 +49,10 @@ cfg_rt_core! {
 
 cfg_test_util_unstable! {
     use std::sync::Arc;
-    use crate::syscall::{Syscalls, DefaultSyscalls};
+    use crate::syscall::Syscalls;
 
-    pub(crate) fn syscalls() -> Arc<dyn Syscalls> {
-        CONTEXT.with(|ctx| match *ctx.borrow() {
-            Some(ref ctx) => Arc::clone(& ctx.syscalls.clone()),
-            None => Arc::new(DefaultSyscalls)
-        })
+    pub(crate) fn syscalls() -> Option<Arc<dyn Syscalls>> {
+        CONTEXT.with(|ctx|  ctx.borrow().as_ref().map(|ctx| Arc::clone(&ctx.syscalls.clone())))
     }
 }
 
