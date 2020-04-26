@@ -68,7 +68,7 @@ pub struct Builder {
     pub(super) before_stop: Option<Callback>,
 
     #[cfg(all(feature = "test-util", tokio_unstable))]
-    pub(super) syscalls: Arc<dyn crate::syscall::Syscalls>,
+    syscalls: Arc<dyn crate::syscall::Syscalls>,
 }
 
 #[derive(Debug, Clone, Copy)]

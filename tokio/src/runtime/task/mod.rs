@@ -81,8 +81,6 @@ pub(crate) trait Schedule: Sync + Sized + 'static {
 
 cfg_test_util_unstable! {
     /// Create a new task with an associated join handle
-    ///
-    /// In orer to take advantage of the [Syscall] trait
     pub(crate) fn joinable<T, S>(task: T) -> (Notified<S>, JoinHandle<T::Output>)
     where
         T: Future + Send + 'static,
