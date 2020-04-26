@@ -79,7 +79,6 @@ pub(crate) trait Schedule: Sync + Sized + 'static {
     }
 }
 
-
 cfg_test_util_unstable! {
     /// Create a new task with an associated join handle
     ///
@@ -107,7 +106,6 @@ cfg_test_util_unstable! {
         (Notified(task), join)
     }
 }
-
 
 cfg_not_test_util_unstable! {
     /// Create a new task with an associated join handle

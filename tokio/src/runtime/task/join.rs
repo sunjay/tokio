@@ -72,7 +72,7 @@ doc_rt_core! {
     ///
     /// [`task::spawn`]: crate::task::spawn()
     /// [`task::spawn_blocking`]: crate::task::spawn_blocking
-    /// [`std::thread::JoinHandle`]: std::thread::JoinHandle  
+    /// [`std::thread::JoinHandle`]: std::thread::JoinHandle
     pub struct JoinHandle<T> {
         inner: Inner<T>
     }
@@ -80,7 +80,7 @@ doc_rt_core! {
 
 cfg_not_test_util_unstable! {
     use std::marker::PhantomData;
-    
+
     struct Inner<T> {
         raw: Option<RawTask>,
         _p: PhantomData<T>
@@ -158,7 +158,7 @@ cfg_test_util_unstable! {
             // When the Syscall trait is active, all spawned futures will result in ().
             // Their results are instead captured in a oneshot::Receiver.
             let mut ret: Poll<super::Result<()>> = Poll::Pending;
-            
+
             unsafe {
                 raw.try_read_output(&mut ret as *mut _ as *mut (), cx.waker());
             }
@@ -176,15 +176,10 @@ cfg_test_util_unstable! {
     }
 }
 
-
-
-
 unsafe impl<T: Send> Send for JoinHandle<T> {}
 unsafe impl<T: Send> Sync for JoinHandle<T> {}
 
 impl<T> Unpin for JoinHandle<T> {}
-
-
 
 impl<T> Drop for JoinHandle<T> {
     fn drop(&mut self) {

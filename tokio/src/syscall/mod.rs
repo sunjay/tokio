@@ -18,7 +18,7 @@ pub(crate) use default::DefaultSyscalls;
 
 /// Syscalls trait allows for hooking into the Tokio runtime.
 pub trait Syscalls: Send + Sync {
-
     /// Hook into tokio::spawn
-    fn spawn(&self, future: Pin<Box<dyn Future<Output = ()>>>) -> Pin<Box<dyn Future<Output = ()>>>;
+    fn spawn(&self, future: Pin<Box<dyn Future<Output = ()>>>)
+        -> Pin<Box<dyn Future<Output = ()>>>;
 }
