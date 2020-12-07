@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1607313451295,
+  "lastUpdate": 1607313470256,
   "repoUrl": "https://github.com/sunjay/tokio",
   "entries": {
     "sync_semaphore": [
@@ -109,6 +109,56 @@ window.BENCHMARK_DATA = {
             "name": "read_uncontended",
             "value": 561,
             "range": "± 66",
+            "unit": "ns/iter"
+          }
+        ]
+      }
+    ],
+    "rt_multi_threaded": [
+      {
+        "commit": {
+          "author": {
+            "email": "liufuyang@users.noreply.github.com",
+            "name": "Fuyang Liu",
+            "username": "liufuyang"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0707f4c19210d6dac620c663e94d34834714a7c9",
+          "message": "net: add TcpStream::into_std (#3189)",
+          "timestamp": "2020-12-06T14:33:04+01:00",
+          "tree_id": "a3aff2f279b1e560602b4752435e092b4a22424e",
+          "url": "https://github.com/sunjay/tokio/commit/0707f4c19210d6dac620c663e94d34834714a7c9"
+        },
+        "date": 1607313469419,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "chained_spawn",
+            "value": 185399,
+            "range": "± 13298",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "ping_pong",
+            "value": 701012,
+            "range": "± 48307",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "spawn_many",
+            "value": 5545286,
+            "range": "± 1304662",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "yield_many",
+            "value": 20185272,
+            "range": "± 3184890",
             "unit": "ns/iter"
           }
         ]
