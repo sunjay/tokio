@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1607743162113,
+  "lastUpdate": 1607743172785,
   "repoUrl": "https://github.com/sunjay/tokio",
   "entries": {
     "sync_semaphore": [
@@ -267,6 +267,54 @@ window.BENCHMARK_DATA = {
             "name": "yield_many",
             "value": 20185272,
             "range": "± 3184890",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "cameron.evan@gmail.com",
+            "name": "Evan Cameron",
+            "username": "leshow"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "68717c7efaced76651915696495dcb04c890be25",
+          "message": "net: remove empty udp module (#3260)",
+          "timestamp": "2020-12-11T14:45:57-05:00",
+          "tree_id": "1b7333194ac78d7ae87c5ca9f423ef830cb486b8",
+          "url": "https://github.com/sunjay/tokio/commit/68717c7efaced76651915696495dcb04c890be25"
+        },
+        "date": 1607743157290,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "chained_spawn",
+            "value": 193181,
+            "range": "± 41774",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "ping_pong",
+            "value": 718352,
+            "range": "± 110964",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "spawn_many",
+            "value": 4969369,
+            "range": "± 1298530",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "yield_many",
+            "value": 19963558,
+            "range": "± 3720976",
             "unit": "ns/iter"
           }
         ]
