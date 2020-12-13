@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1607902823353,
+  "lastUpdate": 1607902833112,
   "repoUrl": "https://github.com/sunjay/tokio",
   "entries": {
     "sync_semaphore": [
@@ -107,6 +107,60 @@ window.BENCHMARK_DATA = {
             "name": "uncontended_concurrent_single",
             "value": 1054,
             "range": "± 143",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "6172808+skerkour@users.noreply.github.com",
+            "name": "Sylvain Kerkour",
+            "username": "skerkour"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9149d7bfae251289cd21aa9ee109b4e2a190d0fa",
+          "message": "docs: mention blocking thread timeout in src/lib.rs (#3253)",
+          "timestamp": "2020-12-13T16:24:16+01:00",
+          "tree_id": "38b69f17cc4644ac6ca081aa1d88d5cfe35825fa",
+          "url": "https://github.com/sunjay/tokio/commit/9149d7bfae251289cd21aa9ee109b4e2a190d0fa"
+        },
+        "date": 1607902832351,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "contended_concurrent_multi",
+            "value": 15397,
+            "range": "± 5359",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "contended_concurrent_single",
+            "value": 1089,
+            "range": "± 9",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "uncontended",
+            "value": 660,
+            "range": "± 25",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "uncontended_concurrent_multi",
+            "value": 14788,
+            "range": "± 3929",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "uncontended_concurrent_single",
+            "value": 1091,
+            "range": "± 17",
             "unit": "ns/iter"
           }
         ]
