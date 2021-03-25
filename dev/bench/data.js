@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1616640985606,
+  "lastUpdate": 1616640987406,
   "repoUrl": "https://github.com/sunjay/tokio",
   "entries": {
     "sync_semaphore": [
@@ -833,6 +833,90 @@ window.BENCHMARK_DATA = {
             "name": "uncontented_unbounded",
             "value": 807524,
             "range": "± 73320",
+            "unit": "ns/iter"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "kai.jewson@gmail.com",
+            "name": "Kai Jewson",
+            "username": "KaiJewson"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0dc4769708279a076e01a66dc53ec226083c1bdb",
+          "message": "sync: add OwnedRwLockReadGuard and OwnedRwLockWriteGuard (#3340)",
+          "timestamp": "2021-03-23T13:40:17+01:00",
+          "tree_id": "f2176a8959a190799a3da96112d37904a10ad86e",
+          "url": "https://github.com/sunjay/tokio/commit/0dc4769708279a076e01a66dc53ec226083c1bdb"
+        },
+        "date": 1616640986582,
+        "tool": "cargo",
+        "benches": [
+          {
+            "name": "contention_bounded",
+            "value": 6024856,
+            "range": "± 2187674",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "contention_bounded_full",
+            "value": 5666514,
+            "range": "± 1111302",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "contention_unbounded",
+            "value": 5743121,
+            "range": "± 2005001",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "create_100_000_medium",
+            "value": 549,
+            "range": "± 8",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "create_100_medium",
+            "value": 545,
+            "range": "± 4",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "create_1_medium",
+            "value": 544,
+            "range": "± 3",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "send_large",
+            "value": 73616,
+            "range": "± 3966",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "send_medium",
+            "value": 1245,
+            "range": "± 175",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "uncontented_bounded",
+            "value": 964004,
+            "range": "± 8071",
+            "unit": "ns/iter"
+          },
+          {
+            "name": "uncontented_unbounded",
+            "value": 694477,
+            "range": "± 6184",
             "unit": "ns/iter"
           }
         ]
